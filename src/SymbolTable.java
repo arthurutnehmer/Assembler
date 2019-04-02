@@ -41,7 +41,7 @@ public class SymbolTable
 
     /**
      * Returns the integer associated with the symbol.
-     * @param String
+     * @param symbol
      * Input string that is the symbol.
      * @return
      * returns the integer related to the string.
@@ -74,8 +74,4 @@ public class SymbolTable
       {
           mapOfSymbols.put(symbol, value);
       }
-
-
-
-
 }

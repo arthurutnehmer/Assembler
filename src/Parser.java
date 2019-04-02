@@ -33,6 +33,8 @@ public class Parser
     /**
      * Constructor that opens the input file/stream and parses it.
      * Also initializes table of allowed characters and fills it up.
+     * @throws IOException
+     * Will throw an I.O.exception if the file cannot be opened.
      */
     public Parser(String inputFileName) throws IOException
     {
@@ -155,7 +157,7 @@ public class Parser
     /**
      * Method that is used to move the scanner aka the programs current command to the next one
      * if possible.
-     * @exception
+     * @throws
      * throws a RuntimeException if an invalid character is used.
      */
     public void advance() throws RuntimeException

@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
-public class Assembler {
+public class Assembler
+{
 
     // ALGORITHM:
     // get input file name
@@ -43,14 +44,15 @@ public class Assembler {
 
         outputFileName = inputFileName.substring(0,inputFileName.lastIndexOf('.')) + ".hack";
 
-        try {
+        try
+        {
             outputFile = new PrintWriter(new FileOutputStream(outputFileName));
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException ex)
+        {
             System.err.println("Could not open output file " + outputFileName);
             System.err.println("Run program again, make sure you have write permissions, etc.");
             System.exit(0);
         }
-
         // TODO: finish driver as algorithm describes
         //first pass.
         symbolTable = new SymbolTable();
@@ -59,8 +61,6 @@ public class Assembler {
         //second pass.
         secondPass(inputFileName,symbolTable, outputFile );
         outputFile.close();
-
-
     }
 
     // TODO: march through the source code without generating any code
@@ -76,7 +76,6 @@ public class Assembler {
         try
         {
             firstPass = new Parser((inputFileName));
-
             while (firstPass.hasMoreCommands())
             {
                 firstPass.advance();
@@ -94,7 +93,6 @@ public class Assembler {
                 }
                 else
                 {
-
                 }
             }
         }
@@ -109,7 +107,6 @@ public class Assembler {
             System.out.println(e);
             System.exit(0);
         }
-
     }
 
     // TODO: march again through the source code and process each line:
@@ -166,7 +163,6 @@ public class Assembler {
                     }
                 }
             }
-
         }
         catch (IOException e)
         {
@@ -175,7 +171,4 @@ public class Assembler {
             System.exit(0);
         }
     }
-
-
-
 }
