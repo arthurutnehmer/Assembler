@@ -39,7 +39,6 @@ public class SymbolTable
         mapOfSymbols.put("THAT", 4);
     }
 
-
     /**
      * Returns the integer associated with the symbol.
      * @param String

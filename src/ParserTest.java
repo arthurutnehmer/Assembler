@@ -46,17 +46,17 @@ public class ParserTest
     {
         try
         {
-            testParser = new Parser("testFile");
+            testParser = new Parser("testFile.asm");
             while (testParser.hasMoreCommands())
             {
                 testParser.advance();
-                if(  (testParser.parseCommandType(testParser.getCurrentCommand()))  == '0')
+                if(  (testParser.commandType()  == '0'))
                 {
 
                 }
                 else
                 {
-                  //  System.out.println((testParser.getCurrentCommand()));
+                   System.out.println((testParser.commandType()));
                 }
             }
         }
@@ -71,7 +71,7 @@ public class ParserTest
     {
         try
         {
-            testParser = new Parser("testFile");
+            testParser = new Parser("testFile.asm");
             while (testParser.hasMoreCommands())
             {
                 testParser.advance();
@@ -93,7 +93,7 @@ public class ParserTest
     {
         try
         {
-            testParser = new Parser("testFile");
+            testParser = new Parser("testFile.asm");
             while (testParser.hasMoreCommands())
             {
                 testParser.advance();
@@ -106,7 +106,7 @@ public class ParserTest
 
         catch (IOException e)
         {
-
+            System.out.println(e);
         }
     }
 
@@ -115,7 +115,7 @@ public class ParserTest
     {
         try
         {
-            testParser = new Parser("testFile");
+            testParser = new Parser("testFile.asm");
             while (testParser.hasMoreCommands())
             {
                 testParser.advance();
@@ -137,7 +137,7 @@ public class ParserTest
     {
         try
         {
-            testParser = new Parser("testFile");
+            testParser = new Parser("testFile.asm");
             while (testParser.hasMoreCommands())
             {
                 testParser.advance();

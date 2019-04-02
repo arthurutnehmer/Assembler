@@ -1,4 +1,5 @@
 import jdk.nashorn.internal.ir.Symbol;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -27,7 +28,6 @@ public class Parser
     private String computation;
     private String jump;
     private String currentCommand;
-    private int romLine;
     private int aSMline;
 
     /**
@@ -39,6 +39,15 @@ public class Parser
         AddAllowedCharacters();
         fileInput = new Scanner(new File(inputFileName));
         fileInput.useDelimiter("\n");
+    }
+
+    /**
+     *  Constructor that initializes a table of allowed characters and fills it up.
+     *  This is a blank constructor.
+     */
+    public Parser()
+    {
+        AddAllowedCharacters();
     }
 
     /**
@@ -85,7 +94,7 @@ public class Parser
         }
         else
         {
-            jump = null;
+            jump = "null";
         }
         return jump;
     }
@@ -104,7 +113,7 @@ public class Parser
             }
             else
             {
-                destination = null;
+                destination = "null";
             }
         return destination;
     }
@@ -144,22 +153,27 @@ public class Parser
     }
 
     /**
-     *  Constructor that initializes a table of allowed characters and fills it up.
-     *  This is a blank constructor.
-     */
-    public Parser()
-    {
-        AddAllowedCharacters();
-    }
-    /**
      * Method that is used to move the scanner aka the programs current command to the next one
      * if possible.
+     * @exception
+     * throws a RuntimeException if an invalid character is used.
      */
-    public void advance()
+    public void advance() throws RuntimeException
     {
         currentCommand = cleanLine(fileInput.nextLine());
         aSMline++;
 
+        for(int i = 0; i< currentCommand.length(); i++)
+        {
+            if(!isValidCharacter(currentCommand.charAt(i)) && (commandType()== 'C') )
+            {
+                throw new RuntimeException("Error, invalid character " + currentCommand.charAt(i) + " on line " + aSMline + " of file.");
+            }
+            else
+            {
+
+            }
+        }
     }
 
     /**
@@ -213,6 +227,21 @@ public class Parser
         return commandType;
     }
 
+    /**
+     * Method that determines the command type of the current command stored in the parameter current command.
+     * Can either be an A instruction, C instruction,or a label.
+     * @return
+     * Returns a char indicating what type of command it is.
+     * If the method cannot detect what type of command it is, it will return 0.
+     * A - a instruction.
+     * C - c instruction.
+     * L - a label.
+     */
+    public char commandType()
+    {
+        return parseCommandType(currentCommand);
+    }
+
 
     /**
      * Helper Method that removes whitespace and comments from the line.
@@ -236,8 +265,6 @@ public class Parser
 
         return  nextLineOfAssembly;
     }
-
-
 
     /**
      * Helper Method that fills the arrayOfAllowedCharacters with legal characters.
@@ -279,7 +306,6 @@ public class Parser
         arrayOfAllowedCharacters[124] = true;
     }
 
-
     /**
      * Helper method that checks to see if the character is in the valid array.
      * @param characterToEvaluate
@@ -305,6 +331,5 @@ public class Parser
         int a = c;
         return a;
     }
-
 
 }
