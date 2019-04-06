@@ -225,7 +225,6 @@ public class Parser
         {
             commandType = 'L';
         }
-
         return commandType;
     }
 

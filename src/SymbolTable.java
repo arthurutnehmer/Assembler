@@ -1,12 +1,13 @@
 import java.util.HashMap;
 /**
  * SymbolTable : A symbol table that keeps a correspondence between symbolic labels and numeric addresses.
+ * @version 1.0
  */
 
 public class SymbolTable
 {
     /**
-     * The HashMap containing the symbols.
+     *The HashMap containing the symbols.
      */
     private HashMap<String, Integer> mapOfSymbols;
 
